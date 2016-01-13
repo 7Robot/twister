@@ -1,11 +1,25 @@
 import pygame
 import os
+import time
 pygame.mixer.init()
-pygame.mixer.music.load("1.wav")
-pygame.mixer.music.queue("2.wav")
 
-for x in range(0, 3):
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy() == True:
-        continue
+s = pygame.mixer.Sound('body/pied.ogg')
 
+
+s.play()
+
+time.sleep(5)
+
+pygame.mixer.quit()
+
+
+# pygame.mixer.music.load("player/Daniel.ogg")
+# pygame.mixer.music.queue("mets ton.ogg")
+# pygame.mixer.music.queue("body/pied.ogg")
+# pygame.mixer.music.queue("sur le.ogg")
+# pygame.mixer.music.queue("color/bleu.ogg")
+#
+#
+# pygame.mixer.music.play()
+# while pygame.mixer.music.get_busy() == True:
+#     continue
