@@ -1,17 +1,18 @@
 import pygame
 import os
 import time
+import random
 pygame.mixer.init()
 
 players = ['player/daniel.ogg', 'player/pepino.ogg']
-bodyparts = ['body/pied.ogg', 'body/ta main.ogg']
-colors = ['color/bleu.ogg', 'color/rouge.ogg']
+bodyparts = ['body/ton pied.ogg', 'body/ta main.ogg']
+colors = ['color/bleu.ogg', 'color/rouge.ogg', 'color/jeune.ogg', 'color/vert.ogg']
 sides = ['side/gauche', 'side/droite']
 
 
-player = pygame.mixer.Sound(players[0])
+player = pygame.mixer.Sound(players[1])
 bodypart = pygame.mixer.Sound(bodyparts[1])
-color = pygame.mixer.Sound(colors[1])
+color = pygame.mixer.Sound(colors[2])
 side = pygame.mixer.Sound(sides[1])
 
 mets = pygame.mixer.Sound('mets.ogg')
