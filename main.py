@@ -3,17 +3,44 @@ import os
 import time
 pygame.mixer.init()
 
-s = pygame.mixer.Sound('body/pied.ogg')
+players = ['player/daniel.ogg', 'player/pepino.ogg']
+bodyparts = ['body/pied.ogg', 'body/ta main.ogg']
+colors = ['color/bleu.ogg', 'color/rouge.ogg']
+sides = ['side/gauche', 'side/droite']
 
 
-s.play()
+player = pygame.mixer.Sound(players[0])
+bodypart = pygame.mixer.Sound(bodyparts[1])
+color = pygame.mixer.Sound(colors[1])
+side = pygame.mixer.Sound(sides[1])
 
-time.sleep(5)
+mets = pygame.mixer.Sound('mets.ogg')
+surle = pygame.mixer.Sound('sur le.ogg')
 
+player.play()
+while pygame.mixer.get_busy() == True:
+    continue
+
+mets.play()
+while pygame.mixer.get_busy() == True:
+    continue
+
+bodypart.play()
+while pygame.mixer.get_busy() == True:
+    continue
+
+surle.play()
+while pygame.mixer.get_busy() == True:
+    continue
+time.sleep(0.5)
+
+color.play()
+while pygame.mixer.get_busy() == True:
+    continue
 pygame.mixer.quit()
 
 
-# pygame.mixer.music.load("player/Daniel.ogg")
+# pygame.mixer.music.load("player/daniel.ogg")
 # pygame.mixer.music.queue("mets ton.ogg")
 # pygame.mixer.music.queue("body/pied.ogg")
 # pygame.mixer.music.queue("sur le.ogg")
