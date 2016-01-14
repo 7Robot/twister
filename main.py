@@ -2,6 +2,7 @@ import pygame
 import os
 import time
 import random
+
 pygame.mixer.init()
 
 players = ['player/daniel.ogg', 'player/pepino.ogg']
