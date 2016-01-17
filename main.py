@@ -1,44 +1,103 @@
 import pygame
 import os
+from os import listdir
+from os.path import isfile, join
+
 import time
 import random
 
 pygame.mixer.init()
 
-players = ['player/daniel.ogg', 'player/pepino.ogg']
-bodyparts = ['body/ton pied.ogg', 'body/ta main.ogg']
-colors = ['color/bleu.ogg', 'color/rouge.ogg', 'color/jeune.ogg', 'color/vert.ogg']
-sides = ['side/gauche', 'side/droite']
 
 
-player = pygame.mixer.Sound(players[1])
-bodypart = pygame.mixer.Sound(bodyparts[1])
-color = pygame.mixer.Sound(colors[2])
-side = pygame.mixer.Sound(sides[1])
+players = [f for f in listdir('1_player/') if isfile(join('1_player/', f))]
+actions = [f for f in listdir('2_action/') if isfile(join('2_action/', f))]
+facons = [f for f in listdir('3_facon/') if isfile(join('3_facon/', f))]
+bodyparts = ['1.ogg','1.ogg','2.ogg','2.ogg','3.ogg','3.ogg','4.ogg','4.ogg','5.ogg','6.ogg','7.ogg']
+sides = ["left", "right"]
+colors = [f for f in listdir('8_color/') if isfile(join('8_color/', f))]
+maleadj = [f for f in listdir('5_adj/m/') if isfile(join('5_adj/m/', f))]
+femaleadj = [f for f in listdir('5_adj/f/') if isfile(join('5_adj/f/', f))]
 
-mets = pygame.mixer.Sound('mets.ogg')
-surle = pygame.mixer.Sound('sur le.ogg')
 
-player.play()
-while pygame.mixer.get_busy() == True:
-    continue
+print players
+print actions
+print facons
+print colors
 
-mets.play()
-while pygame.mixer.get_busy() == True:
-    continue
+print "Runnung twister generator in ifinite loop, press Ctrl+C to exit"
 
-bodypart.play()
-while pygame.mixer.get_busy() == True:
-    continue
+while (True):
+    side = random.choice(sides)
+    player = pygame.mixer.Sound("1_player/"+random.choice(players))
+    action = pygame.mixer.Sound("2_action/"+random.choice(actions))
+    facon = pygame.mixer.Sound("3_facon/"+random.choice(facons))
+    genderref = "6_bodypart/"+random.choice(bodyparts)
+    bodypart = pygame.mixer.Sound(genderref)
+    color = pygame.mixer.Sound("8_color/"+random.choice(colors))
 
-surle.play()
-while pygame.mixer.get_busy() == True:
-    continue
-time.sleep(0.5)
+    if genderref == "6_bodypart/1.ogg" or genderref == "6_bodypart/2.ogg" or genderref == "6_bodypart/7.ogg":
+        gender = "male"
 
-color.play()
-while pygame.mixer.get_busy() == True:
-    continue
+    elif genderref == "6_bodypart/3.ogg" or genderref == "6_bodypart/4.ogg" or genderref == "6_bodypart/5.ogg":
+        gender = "female"
+
+    else:
+        gender = "plural"
+
+    if gender == "male":
+        taton = "4_taton/ton.ogg"
+        adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
+
+    elif gender == "female":
+        taton = "4_taton/ta.ogg"
+        adjective = pygame.mixer.Sound('5_adj/f/'+ random.choice(femaleadj))
+
+    else:
+        taton = "4_taton/tes.ogg"
+        adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
+
+    pronom = pygame.mixer.Sound(taton)
+
+
+
+    #
+    # print genderref
+    # print gender
+    # print side
+    # print adjective
+
+    player.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    action.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    facon.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    pronom.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    adjective.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+
+    bodypart.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    color.play()
+    while pygame.mixer.get_busy() == True:
+        continue
+
+    time.sleep(2)
+
 pygame.mixer.quit()
 
 
