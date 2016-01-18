@@ -9,7 +9,7 @@ import random
 pygame.mixer.init()
 
 
-
+initphrases = [f for f in listdir('0_start/') if isfile(join('0_start/', f))]
 players = [f for f in listdir('1_player/') if isfile(join('1_player/', f))]
 actions = [f for f in listdir('2_action/') if isfile(join('2_action/', f))]
 facons = [f for f in listdir('3_facon/') if isfile(join('3_facon/', f))]
@@ -20,12 +20,17 @@ maleadj = [f for f in listdir('5_adj/m/') if isfile(join('5_adj/m/', f))]
 femaleadj = [f for f in listdir('5_adj/f/') if isfile(join('5_adj/f/', f))]
 
 
-print players
-print actions
-print facons
-print colors
+
 
 print "Runnung twister generator in ifinite loop, press Ctrl+C to exit"
+
+turn = 1
+
+start = pygame.mixer.Sound("0_start/"+random.choice(initphrases))
+
+start.play()
+while pygame.mixer.get_busy() == True:
+    continue
 
 while (True):
     side = random.choice(sides)
@@ -46,15 +51,15 @@ while (True):
         gender = "plural"
 
     if gender == "male":
-        taton = "4_taton/ton.ogg"
+        taton = "4_taton/2.ogg"
         adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
 
     elif gender == "female":
-        taton = "4_taton/ta.ogg"
+        taton = "4_taton/1.ogg"
         adjective = pygame.mixer.Sound('5_adj/f/'+ random.choice(femaleadj))
 
     else:
-        taton = "4_taton/tes.ogg"
+        taton = "4_taton/3.ogg"
         adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
 
     pronom = pygame.mixer.Sound(taton)
@@ -66,10 +71,10 @@ while (True):
     # print gender
     # print side
     # print adjective
-
-    player.play()
-    while pygame.mixer.get_busy() == True:
-        continue
+    if turn != 1:
+        player.play()
+        while pygame.mixer.get_busy() == True:
+            continue
 
     action.play()
     while pygame.mixer.get_busy() == True:
@@ -95,7 +100,7 @@ while (True):
     color.play()
     while pygame.mixer.get_busy() == True:
         continue
-
+    turn += 1
     time.sleep(2)
 
 pygame.mixer.quit()
