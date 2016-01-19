@@ -18,6 +18,8 @@ sides = ["left", "right"]
 colors = [f for f in listdir('8_color/') if isfile(join('8_color/', f))]
 maleadj = [f for f in listdir('5_adj/m/') if isfile(join('5_adj/m/', f))]
 femaleadj = [f for f in listdir('5_adj/f/') if isfile(join('5_adj/f/', f))]
+malesides = ["droit.ogg", "droit.ogg", "gauche1.ogg", "gauche2.ogg"]
+femalesides = ["droite.ogg", "droite.ogg", "gauche1.ogg", "gauche2.ogg"]
 
 
 
@@ -41,6 +43,7 @@ while (True):
     bodypart = pygame.mixer.Sound(genderref)
     color = pygame.mixer.Sound("8_color/"+random.choice(colors))
 
+
     if genderref == "6_bodypart/1.ogg" or genderref == "6_bodypart/2.ogg" or genderref == "6_bodypart/7.ogg":
         gender = "male"
 
@@ -53,14 +56,17 @@ while (True):
     if gender == "male":
         taton = "4_taton/2.ogg"
         adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
+        side = pygame.mixer.Sound('7_lr/'+ random.choice(malesides))
 
     elif gender == "female":
         taton = "4_taton/1.ogg"
         adjective = pygame.mixer.Sound('5_adj/f/'+ random.choice(femaleadj))
+        side = pygame.mixer.Sound('7_lr/'+ random.choice(femalesides))
 
     else:
         taton = "4_taton/3.ogg"
         adjective = pygame.mixer.Sound('5_adj/m/'+ random.choice(maleadj))
+        side = pygame.mixer.Sound('7_lr/'+ random.choice(malesides))
 
     pronom = pygame.mixer.Sound(taton)
 
@@ -96,6 +102,11 @@ while (True):
     bodypart.play()
     while pygame.mixer.get_busy() == True:
         continue
+
+    if genderref != "6_bodypart/6.ogg" and genderref != "6_bodypart/5.ogg":
+        side.play()
+        while pygame.mixer.get_busy() == True:
+            continue
 
     color.play()
     while pygame.mixer.get_busy() == True:
